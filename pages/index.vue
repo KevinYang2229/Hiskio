@@ -4,7 +4,8 @@
       <div class="mb-8 sm:mr-4 md:flex-1">
         <h2 class="font-bold text-xl mb-5">購物車</h2>
         <div class=" bg-white shadow-borderBottom">
-          <CardList></CardList>
+          <CardList class="sm:hidden block"></CardList>
+          <TableList class="hidden sm:block"></TableList>
         </div>
       </div>
 
@@ -36,19 +37,47 @@
     </div>
 
     <div class="p-4">
-      <h2 class="font-bold text-xl">購物車</h2>
-      <div v-for="(n, i) in 4" :key="n" >
-        <Card :idx="i"></Card>
+      <h2 class="font-bold text-xl mb-3">募資課程</h2>
+      <div class="block sm:flex sm:gap-3">
+        <div v-for="(item, i) in data" :key="item.id" >
+          <MobileCard class="sm:hidden block" :idx="i" :product="item"></MobileCard>
+          <TableCard class="hidden sm:block" :idx="i" :product="item"></TableCard>
+        </div>
       </div>
-
     </div>
+
+    <Login v-show="isLogin"></Login>
   </div>
 
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'IndexPage',
   layout: 'StandardLayout',
+  async asyncData({ app, error }) {
+    const { data } = await axios({
+      method: 'get',
+      baseURL: 'https://api.hiskio.com/v2',
+      url: '/courses/fundraising',
+      'Content-Type': 'application/json',
+    })
+
+    return { data }
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+    ...mapState({
+      isLogin: state => state.isLogin,
+    }),
+  },
+  created() {
+    console.log(this.data)
+  }
 }
 </script>
