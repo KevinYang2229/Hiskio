@@ -2,12 +2,13 @@
   <div class="w-[calc(100% / 4)] bg-white rounded-lg overflow-hidden">
     <img class="mr-3" :src="product.image" alt="pic">
     <div class="p-3">
-      <h4>{{ product.title }}</h4>
-      <div v-for="teacher in product.lecturers" :key="teacher.id">
-        <img src="" alt="">
-        <span >{{ teacher.username }}</span>
+      <h4 class="text-xl font-medium mb-1">{{ product.title }}</h4>
+      <div v-for="teacher in product.lecturers" :key="teacher.id" class="flex mt-2 mr-2 items-center">
+        <img class="w-8 rounded-3xl mr-1" :src="teacher.avatar" alt="">
+        <span class="text-neutral-500">{{ teacher.username }}</span>
       </div>
-      <div class="flex justify-between">
+
+      <div class="flex justify-between mt-1">
         <span class="text-sm">{{ expiryDate }}</span>
         <span class="text-sm">{{ fundraisingString }}</span>
       </div>
@@ -30,7 +31,7 @@ export default {
     product: {
       type: Object,
       default: () => ({}),
-    },
+    }
   },
   computed: {
     expiryDate() {
