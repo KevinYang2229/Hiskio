@@ -3,7 +3,7 @@
     <table class="w-full">
       <thead class="border-b">
         <tr class="flex items-center p-3">
-          <td class="w-[340px] flex flex-1">項目</td>
+          <td class="w-[340px] flex">項目</td>
           <td class="mx-5 w-[74px] text-center">售價</td>
           <td class="flex-1 text-right">結帳金額</td>
           <td class="w-[48px]"></td>

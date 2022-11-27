@@ -3,11 +3,13 @@
     <div class="flex">
       <img class="w-[140px] mr-3" :src="product.image" alt="pic">
       <div class="flex flex-col justify-between">
-        <div>已募資 55%</div>
-        <div class="w-[75px] h-[6px] bg-neutral-200 rounded-full"></div>
+        <div>{{ fundraisingString }}</div>
+        <div class="w-full bg-neutral-200 rounded-full h-2.5 mb-4">
+          <div class="bg-secondary-default h-2.5 rounded-full" :style="{ width: `${fundraising}%` }"></div>
+        </div>
         <div>
-          <span class="mr-1 font-medium text-gray-700">${{product.price}}</span>
-          <span class="text-state-disabled line-through">${{product.fixed_price}}</span>
+          <span class="mr-1 font-medium text-gray-700">${{ product.price }}</span>
+          <span class="text-state-disabled line-through">${{ product.fixed_price }}</span>
         </div>
       </div>
       <svg class="ml-auto mb-auto" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,9 +37,14 @@ export default {
       default: () => ({}),
     },
   },
-  mounted() {
-    console.log(this.product)
-  }
+  computed: {
+    fundraising() {
+      return Math.ceil(this.product.consumers / this.product.students * 100)
+    },
+    fundraisingString() {
+      return `已募資 ${this.fundraising} %`
+    }
+  },
 }
 
 </script>
