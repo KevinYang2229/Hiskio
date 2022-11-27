@@ -1,13 +1,13 @@
 <template>
-  <div class="p-3 rounded-md bg-white mt-3 shadow-borderBottom" :class="{'mt-3': i !== 0}">
+  <div class="p-3 rounded-md bg-white mt-3 shadow-borderBottom">
     <div class="flex">
-      <img class="w-[140px] mr-3" src="@/static/images/p1.svg" alt="pic">
+      <img class="w-[140px] mr-3" :src="product.image" alt="pic">
       <div class="flex flex-col justify-between">
         <div>已募資 55%</div>
         <div class="w-[75px] h-[6px] bg-neutral-200 rounded-full"></div>
         <div>
-          <span class="mr-1 font-medium text-gray-700">$2,500</span>
-          <span class="text-state-disabled line-through">$5,000</span>
+          <span class="mr-1 font-medium text-gray-700">${{product.price}}</span>
+          <span class="text-state-disabled line-through">${{product.fixed_price}}</span>
         </div>
       </div>
       <svg class="ml-auto mb-auto" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -22,13 +22,22 @@
 
       <!-- <img class="rounded ml-auto mb-auto" src="@/static/images/p1.svg" alt="pic"> -->
     </div>
-    <div class="mt-3 font-medium">GA 流量掘金術｜成長駭客新手村</div>
+    <div class="mt-3 font-medium">{{ product.title }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProductCard'
+  name: 'MobileCard',
+  props: {
+    product: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  mounted() {
+    console.log(this.product)
+  }
 }
 
 </script>
