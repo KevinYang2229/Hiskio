@@ -1,6 +1,6 @@
 <template>
-  <div class="relative ">
-    <BaseHeader />
+  <div class="relative">
+    <BaseHeader class="sticky top-0 z-sticky sm:static" />
     <div class="flex justify-center w-full bg-neutral-100 min-h-screen sm:pt-10">
       <Nuxt />
     </div>
