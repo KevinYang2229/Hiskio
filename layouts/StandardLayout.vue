@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class="relative ">
     <BaseHeader />
-    <div class="flex justify-center w-full bg-neutral-100 min-h-screen sm:pt-20">
+    <div class="flex justify-center w-full bg-neutral-100 min-h-screen sm:pt-10">
       <Nuxt />
     </div>
   </div>
