@@ -1,5 +1,6 @@
 <template>
-  <div class="md:w-[72vw] w-full">
+  <div class="relative md:w-[72vw] w-full">
+    <SideMenu class="fixed transition-all" :class="isOpenSideMenu ? 'top-[60px]' : 'top-full'"></SideMenu>
     <div class="bg-neutral-100 p-4 sm:flex w-full sm:w-auto">
       <div class="mb-8 sm:mr-4 md:flex-1">
         <h2 class="font-bold text-xl mb-5">購物車</h2>
@@ -48,7 +49,6 @@
 
     <Login v-show="isOpenLogin"></Login>
   </div>
-
 </template>
 
 <script>
@@ -75,6 +75,7 @@ export default {
   computed: {
     ...mapState({
       isOpenLogin: state => state.isOpenLogin,
+      isOpenSideMenu: state => state.isOpenSideMenu,
     }),
     totalAmt() {
       return this.cartList.reduce((accumulator, currentValue) => {
@@ -82,14 +83,19 @@ export default {
       }, {price: 0})
     }
   },
+  mounted() {
+    this.cartList = JSON.parse(localStorage.getItem('cartList'))
+  },
   methods: {
     add(item) {
       const matchItem = this.cartList.find(cart => cart.id === item.id)
       matchItem ? this.deleteRec(item.id) : this.cartList.push(item)
+      localStorage.setItem('cartList', JSON.stringify(this.cartList))
     },
     deleteRec(e) {
       const currIndex = this.cartList.findIndex(cart => cart.id === e)
       this.cartList.splice(currIndex, 1)
+      localStorage.setItem('cartList', JSON.stringify(this.cartList))
     }
   },
 }
