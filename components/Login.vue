@@ -123,9 +123,7 @@
         </svg>
         <span class="ml-2">使用 LinkedIn 登入</span>
       </button>
-      <a class="block my-4 text-center text-neutral-700" href="#" @click="login"
-        >使用 HiSKIO ID 登入</a
-      >
+      <a class="block my-4 text-center text-neutral-700" href="#">使用 HiSKIO ID 登入</a>
       <div class="flex w-full py-2 px-3 bg-neutral-50">
         <svg
           width="20"
@@ -140,6 +138,7 @@
           />
         </svg>
         <input
+          v-model="accountInp"
           class="ml-2 w-full bg-neutral-50 outline-none"
           type="text"
           placeholder="請輸入 HiSKIO ID"
@@ -159,8 +158,9 @@
           />
         </svg>
         <input
+          v-model="passwordInp"
           class="ml-2 w-full bg-neutral-50 outline-none"
-          type="text"
+          type="password"
           placeholder="請輸入登入密碼"
         />
       </div>
@@ -174,27 +174,67 @@
           >登入註冊即代表您同意使用者及隱私權政策</label
         >
       </div>
-      <button class="py-2 w-full bg-primary-default text-white mt-5 rounded">登入</button>
+      <button class="py-2 w-full bg-primary-default text-white mt-5 rounded" @click="login">
+        登入
+      </button>
       <button class="mt-6 w-full text-center">忘記密碼</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { mapMutations } from 'vuex'
 export default {
   name: 'LoginPage',
+  data() {
+    return {
+      accountInp: '',
+      passwordInp: '',
+    }
+  },
   methods: {
     ...mapMutations({
       setIsOpenLogin: 'setIsOpenLogin',
       setIsLogin: 'setIsLogin',
+      setMemberInfo: 'setMemberInfo',
     }),
     closeLogin() {
       this.setIsOpenLogin(false)
     },
-    login() {
+    async login() {
+      await this.auth()
+      await this.getMemberInfo()
+
       this.setIsOpenLogin(false)
       this.setIsLogin(true)
+    },
+    async auth() {
+      const res = await axios({
+        method: 'post',
+        baseURL: 'https://api.hiskio.com/v2',
+        url: '/auth/login',
+        'Content-Type': 'application/json',
+        data: {
+          account: this.accountInp,
+          password: this.passwordInp,
+          confirm: true,
+        },
+      })
+      sessionStorage.setItem('token', JSON.stringify(res.data))
+    },
+    async getMemberInfo() {
+      const token = JSON.parse(sessionStorage.getItem('token')) || ''
+      const res = await axios({
+        method: 'get',
+        baseURL: 'https://api.hiskio.com/v2',
+        url: '/me',
+        'Content-Type': 'application/json',
+        headers: {
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      })
+      this.setMemberInfo(res.data)
     },
   },
 }
