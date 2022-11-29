@@ -2,6 +2,7 @@ export const state = () => ({
   isOpenLogin: false,
   isLogin: false,
   isOpenSideMenu: false,
+  memberInfo: {},
 })
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
   },
   setIsOpenSideMenu(state, stateValue) {
     state.isOpenSideMenu = stateValue
+  },
+  setMemberInfo(state, stateValue) {
+    state.memberInfo = stateValue
   },
 }

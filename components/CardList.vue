@@ -9,10 +9,10 @@
       <div>
         <div class="flex">
           <img class="w-[62px] rounded" :src="cart.image" alt="pic" />
-          <div class="text-sm ml-2 font-medium">{{ cart.title }}</div>
+          <div class="text-sm ml-2 font-medium">{{ cart.name }}</div>
         </div>
         <div class="text-xs mt-2">
-          <span class="text-gray-500 mr-1">{{ cart.price }}</span>
+          <span class="text-gray-500 mr-1">{{ cart.subtotal }}</span>
           <span class="text-gray-700 border border-black rounded">募資優惠</span>
         </div>
       </div>
@@ -30,7 +30,7 @@
             fill="#BFBFBF"
           />
         </svg>
-        <div>{{ cart.price }}</div>
+        <div>{{ cart.total }}</div>
       </div>
     </div>
   </div>

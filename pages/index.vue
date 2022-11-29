@@ -39,9 +39,9 @@
           <div>
             <div class="flex justify-between mb-12 sm:mb-3">
               <span class="text-gray-500">金額</span>
-              <span class="text-gray-600">${{ totalAmt.price }}</span>
+              <span class="text-gray-600">${{ totalAmt }}</span>
             </div>
-            <div class="text-3xl text-right mb-4">${{ totalAmt.price }}</div>
+            <div class="text-3xl text-right mb-4">${{ totalAmt }}</div>
             <button class="bg-secondary-default text-white w-full p-3 rounded mb-3">
               前往結帳
             </button>
@@ -56,18 +56,18 @@
     <div class="p-4">
       <h2 class="font-bold text-xl mb-3">募資課程</h2>
       <div class="block sm:flex sm:gap-3">
-        <div v-for="(item, i) in data" :key="item.id">
+        <div v-for="(item, i) in currData" :key="item.id">
           <MobileCard
             class="sm:hidden block cursor-pointer"
             :idx="i"
             :product="item"
-            @click.native="add(item)"
+            @click.native="addRec(item)"
           ></MobileCard>
           <TableCard
             class="hidden sm:block cursor-pointer"
             :idx="i"
             :product="item"
-            @click.native="add(item)"
+            @click.native="addRec(item)"
           ></TableCard>
         </div>
       </div>
@@ -84,14 +84,27 @@ export default {
   name: 'IndexPage',
   layout: 'StandardLayout',
   async asyncData({ app, error }) {
-    const { data } = await axios({
+    const res = await axios({
       method: 'get',
       baseURL: 'https://api.hiskio.com/v2',
       url: '/courses/fundraising',
       'Content-Type': 'application/json',
     })
-
-    return { data }
+    const currData = res.data.map(item => {
+      return {
+        id: item.id,
+        image: item.image,
+        name: item.title,
+        subtotal: item.price,
+        total: item.price,
+        fixedPrice: item.fixed_price,
+        fundraisingTickets: item.fundraising_tickets,
+        consumers: item.consumers,
+        lecturers: item.lecturers,
+        estimateDuration: item.estimate_duration,
+      }
+    })
+    return { currData }
   },
   data() {
     return {
@@ -104,19 +117,31 @@ export default {
       isOpenSideMenu: state => state.isOpenSideMenu,
     }),
     totalAmt() {
-      return this.cartList.reduce(
-        (accumulator, currentValue) => {
-          return { price: Number(accumulator.price) + Number(currentValue.price) }
-        },
-        { price: 0 },
-      )
+      let sum = 0
+      for (const cart of this.cartList) {
+        sum += cart.total
+      }
+      return sum
     },
   },
-  mounted() {
-    this.cartList = JSON.parse(localStorage.getItem('cartList'))
+  async mounted() {
+    const token = JSON.parse(sessionStorage.getItem('token')) || ''
+    const res = await axios({
+      method: 'post',
+      baseURL: 'https://api.hiskio.com/v2',
+      url: '/carts',
+      'Content-Type': 'application/json',
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    })
+    const carts = JSON.parse(localStorage.getItem('cartList')) || []
+    console.log(res.data.data)
+    this.cartList = carts
+    // this.cartList = carts.concat(res.data.data)
   },
   methods: {
-    add(item) {
+    addRec(item) {
       const matchItem = this.cartList.find(cart => cart.id === item.id)
       matchItem ? this.deleteRec(item.id) : this.cartList.push(item)
       localStorage.setItem('cartList', JSON.stringify(this.cartList))
