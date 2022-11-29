@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-[72vw] w-full mx-auto flex justify-between p-4 items-center bg-white shadow-borderBottom"
+    class="md:w-[70vw] w-full mx-auto flex justify-between p-4 items-center bg-white shadow-borderBottom"
   >
     <div class="flex items-center">
       <div class="font-black text-sm tracking-[4px] mr-3 cursor-pointer">
@@ -9,7 +9,7 @@
       </div>
       <svg
         v-show="!isLogin"
-        class="mr-4 hidden sm:block cursor-pointer"
+        class="mr-4 hidden sm:block"
         width="80"
         height="40"
         viewBox="0 0 80 40"
@@ -123,6 +123,7 @@
       </div>
 
       <svg
+        class="cursor-pointer"
         width="20"
         height="20"
         viewBox="0 0 20 20"
@@ -134,7 +135,7 @@
           fill="#8C8C8C"
         />
       </svg>
-      <span class="ml-1 text-neutral-400 hidden sm:block">搜尋</span>
+      <span class="ml-1 text-neutral-400 hidden sm:block cursor-pointer">搜尋</span>
     </div>
     <div class="flex items-center">
       <span class="mr-4 hidden sm:block cursor-pointer">我想開課</span>
