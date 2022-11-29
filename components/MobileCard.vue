@@ -7,12 +7,12 @@
         <div class="w-full bg-neutral-200 rounded-full h-2.5 mb-4">
           <div
             class="bg-secondary-default h-2.5 rounded-full"
-            :style="{ width: `${fundraising}%` }"
+            :style="{ width: `${fundraising > 100 ? 100 : fundraising}%` }"
           ></div>
         </div>
         <div>
-          <span class="mr-1 font-medium text-gray-700">${{ product.price }}</span>
-          <span class="text-state-disabled line-through">${{ product.fixed_price }}</span>
+          <span class="mr-1 font-medium text-gray-700">${{ product.total }}</span>
+          <span class="text-state-disabled line-through">${{ product.fixedPrice }}</span>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
 
       <!-- <img class="rounded ml-auto mb-auto" src="@/static/images/p1.svg" alt="pic"> -->
     </div>
-    <div class="mt-3 font-medium">{{ product.title }}</div>
+    <div class="mt-3 font-medium">{{ product.name }}</div>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     fundraising() {
-      return Math.ceil((this.product.consumers / this.product.students) * 100)
+      return Math.ceil((this.product.consumers / this.product.fundraisingTickets) * 100)
     },
     fundraisingString() {
       return `已募資 ${this.fundraising} %`

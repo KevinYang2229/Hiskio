@@ -18,10 +18,10 @@
         >
           <td class="flex w-[340px]">
             <img class="w-[120px]" :src="cart.image" alt="pic" />
-            <span class="ml-3">{{ cart.title }}</span>
+            <span class="ml-3">{{ cart.name }}</span>
           </td>
-          <td class="mx-5 w-[74px] text-center">{{ cart.price }}</td>
-          <td class="flex-1 text-right">{{ cart.price }}</td>
+          <td class="mx-5 w-[74px] text-center">{{ cart.subtotal }}</td>
+          <td class="flex-1 text-right">{{ cart.total }}</td>
           <td class="w-[48px]">
             <svg
               class="mx-auto cursor-pointer"
