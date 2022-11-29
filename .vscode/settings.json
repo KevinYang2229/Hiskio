@@ -1,40 +1,80 @@
 {
-  "[vue]": {
-    "editor.defaultFormatter": "octref.vetur" //"dbaeumer.vscode-eslint"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.formatOnSave": true,
-  "eslint.options": {
-    "extensions": [".js", ".ts", ".vue", ".html"]
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+  "files.autoSave": "afterDelay",
+  "files.associations": {
+    "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": true
   },
-  "vetur.validation.template": false,
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.dontShowNewVersionMessage": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.detectIndentation": false,
+  "editor.fontFamily": "Fira Code, Source Code Pro, 'Courier New', monospace",
+  //"editor.fontFamily": "Source Code Pro, 'Courier New', monospace",
+  // 開啟連字符號
+  "editor.fontLigatures": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "prettier.trailingComma": "all",
+  "eslint.format.enable": true,
+  "eslint.options": {
+    "extensions": [".js", ".ts", ".vue", ".html"]
+  },
+  "eslint.validate": ["javascript", "html", "postcss", "vue"],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "liveServer.settings.port": 5500,
+  // "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"],
+  // "liveSassCompile.settings.excludeList": ["**/node_modules/**", ".vscode/**"],
+  // "liveSassCompile.settings.generateMap": true,
+  // "liveSassCompile.settings.formats": [
+  //   {
+  //     "format": "expanded",
+  //     "extensionName": ".css",
+  //     "savePath": "/public/styles"
+  //   },
+  //   {
+  //     "format": "compressed",
+  //     "extensionName": ".min.css",
+  //     "savePath": "/dist/style"
+  //   }
+  // ]
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.variables": {
+    "lang": "zh-Hant-TW",
+    "charset": "UTF-8"
+  },
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.fontSize": 14,
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "workbench.editor.enablePreview": false,
+  "git.autofetch": true,
+  "team.showWelcomeMessage": false,
+  "bracket-pair-colorizer-2.depreciation-notice": false,
+  "html.hover.references": false,
+  "less.hover.references": false,
+  "css.hover.references": false,
+  "scss.hover.references": false,
   "css.validate": false,
+  "less.validate": false,
   "scss.validate": false,
-  "eslint.validate": ["javascript", "javascriptreact", "html", "vue"],
-  "stylelint.validate": ["css", "scss", "vue"],
-  "prettier.printWidth": 100,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "editor.tabSize": 2
+  "window.zoomLevel": 1,
+  "scss.lint.unknownAtRules": "ignore",
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "cSpell.words": ["formset", "inputtext", "primevue", "signgroup", "signofficer", "useconfirm"],
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+  // "vetur.completion.scaffoldSnippetSources": {
+  //   "workspace": "💼",
+  //   "user": "🗒️",
+  //   "vetur": "✌"
+  // }
 }
